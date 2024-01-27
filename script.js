@@ -7,6 +7,7 @@ const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
+const header = document.querySelector('.header');
 
 const openModal = function (e) {
   e.preventDefault();
@@ -28,3 +29,36 @@ document.addEventListener('keydown', function (e) {
     closeModal();
   }
 });
+
+// selecting elements
+// console.log(document.getElementsByClassName('btn')); // returns HTML collection
+
+// programatically creating adding and removing element
+const cookieMessage = document.createElement('div');
+cookieMessage.classList.add('cookie-message');
+cookieMessage.innerHTML =
+  'We use cookies for improved functionality and analytics <button class="btn btn--close-cookie">Got it!</button>';
+header.append(cookieMessage);
+// header.prepend(cookieMessage.cloneNode(true));
+document
+  .querySelector('.btn--close-cookie')
+  .addEventListener('click', function () {
+    cookieMessage.remove();
+  });
+
+// styling element
+cookieMessage.style.backgroundColor = '#37383d';
+cookieMessage.style.width = '120%';
+console.log(getComputedStyle(cookieMessage).height);
+cookieMessage.style.height =
+  Number.parseFloat(getComputedStyle(cookieMessage).height, 10) + 30 + 'px';
+
+document.documentElement.style.setProperty('--color-primary', 'orangered');
+
+const logo = document.querySelector('.nav__logo');
+console.log(logo.alt);
+console.log(logo.src);
+console.log(logo.className);
+console.log(logo.id);
+
+console.log(logo.dataset.qa);
