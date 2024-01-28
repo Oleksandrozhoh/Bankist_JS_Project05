@@ -77,4 +77,37 @@ console.log(logo.id);
 
 console.log(logo.dataset.qa);
 
+const mouseEnterAlert = function () {
+  alert('addEventListener: great! you are reading the heading :D');
+};
 const h1 = document.querySelector('h1');
+// h1.addEventListener('mouseenter', mouseEnterAlert);
+// h1.removeEventListener('mouseenter', mouseEnterAlert);
+
+//older way to listen to events
+// h1.onmouseenter = function () {
+//   alert('onmouseenter: great! you are reading the heading :D');
+// };
+
+// setTimeout(() => h1.removeEventListener('mouseenter', mouseEnterAlert), 5000);
+
+// bubling
+const randomColor = () =>
+  `rgb(${Math.trunc(Math.random() * 255 + 1)}, ${Math.trunc(
+    Math.random() * 255 + 1
+  )}, ${Math.trunc(Math.random() * 255 + 1)})`;
+
+const navLink = document.querySelector('.nav__link');
+const navLinks = document.querySelector('.nav__links');
+const navSection = document.querySelector('.nav');
+
+navLink.addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
+  e.stopPropagation();
+});
+navLinks.addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
+});
+navSection.addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
+});
