@@ -8,6 +8,8 @@ const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
 const header = document.querySelector('.header');
+const btnLearnMore = document.querySelector('.btn--scroll-to');
+const section1 = document.getElementById('section--1');
 
 const openModal = function (e) {
   e.preventDefault();
@@ -30,6 +32,18 @@ document.addEventListener('keydown', function (e) {
   }
 });
 
+btnLearnMore.addEventListener('click', function (e) {
+  const s1coordinates = section1.getBoundingClientRect();
+  //scrolling
+  // window.scrollTo({
+  //   left: s1coordinates.left + window.pageXOffset,
+  //   top: s1coordinates.top + window.pageYOffset,
+  //   behavior: 'smooth',
+  // });
+  section1.scrollIntoView({ behavior: 'smooth' }); // modern method to scroll
+});
+
+/// LECTURES
 // selecting elements
 // console.log(document.getElementsByClassName('btn')); // returns HTML collection
 
@@ -53,7 +67,7 @@ console.log(getComputedStyle(cookieMessage).height);
 cookieMessage.style.height =
   Number.parseFloat(getComputedStyle(cookieMessage).height, 10) + 30 + 'px';
 
-document.documentElement.style.setProperty('--color-primary', 'orangered');
+// document.documentElement.style.setProperty('--color-primary', 'orangered');
 
 const logo = document.querySelector('.nav__logo');
 console.log(logo.alt);
@@ -62,3 +76,5 @@ console.log(logo.className);
 console.log(logo.id);
 
 console.log(logo.dataset.qa);
+
+const h1 = document.querySelector('h1');
