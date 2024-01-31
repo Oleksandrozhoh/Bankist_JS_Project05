@@ -10,7 +10,11 @@ const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
 const header = document.querySelector('.header');
 const btnLearnMore = document.querySelector('.btn--scroll-to');
 const section1 = document.getElementById('section--1');
+const section2 = document.getElementById('section--2');
+const section3 = document.getElementById('section--3');
+const navMenu = document.querySelector('.nav__links');
 
+// functions
 const openModal = function (e) {
   e.preventDefault();
   modal.classList.remove('hidden');
@@ -32,82 +36,100 @@ document.addEventListener('keydown', function (e) {
   }
 });
 
+// learn more scrolling
 btnLearnMore.addEventListener('click', function (e) {
-  const s1coordinates = section1.getBoundingClientRect();
-  //scrolling
-  // window.scrollTo({
-  //   left: s1coordinates.left + window.pageXOffset,
-  //   top: s1coordinates.top + window.pageYOffset,
-  //   behavior: 'smooth',
-  // });
-  section1.scrollIntoView({ behavior: 'smooth' }); // modern method to scroll
+  section1.scrollIntoView({ behavior: 'smooth' });
 });
 
-/// LECTURES
-// selecting elements
-// console.log(document.getElementsByClassName('btn')); // returns HTML collection
+// navigation menu scrolling ( with event delegation through navMenu section )
+navMenu.addEventListener('click', function (e) {
+  e.preventDefault();
+  console.log(e.target);
+  if (e.target.classList.contains('nav__link')) {
+    // matching strategy
+    const id = e.target.getAttribute('href');
+    document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+  }
+});
 
-// programatically creating adding and removing element
-const cookieMessage = document.createElement('div');
-cookieMessage.classList.add('cookie-message');
-cookieMessage.innerHTML =
-  'We use cookies for improved functionality and analytics <button class="btn btn--close-cookie">Got it!</button>';
-header.append(cookieMessage);
-// header.prepend(cookieMessage.cloneNode(true));
-document
-  .querySelector('.btn--close-cookie')
-  .addEventListener('click', function () {
-    cookieMessage.remove();
-  });
+///////////////////////////LECTURES/////////////////////////////
 
-// styling element
-cookieMessage.style.backgroundColor = '#37383d';
-cookieMessage.style.width = '120%';
-console.log(getComputedStyle(cookieMessage).height);
-cookieMessage.style.height =
-  Number.parseFloat(getComputedStyle(cookieMessage).height, 10) + 30 + 'px';
+// btnLearnMore.addEventListener('click', function (e) {
+//   const s1coordinates = section1.getBoundingClientRect();
+//   //scrolling
+//   // window.scrollTo({
+//   //   left: s1coordinates.left + window.pageXOffset,
+//   //   top: s1coordinates.top + window.pageYOffset,
+//   //   behavior: 'smooth',
+//   // });
+//   section1.scrollIntoView({ behavior: 'smooth' }); // modern method to scroll
+// });
 
-// document.documentElement.style.setProperty('--color-primary', 'orangered');
+// /// LECTURES
+// // selecting elements
+// // console.log(document.getElementsByClassName('btn')); // returns HTML collection
 
-const logo = document.querySelector('.nav__logo');
-console.log(logo.alt);
-console.log(logo.src);
-console.log(logo.className);
-console.log(logo.id);
+// // programatically creating adding and removing element
+// const cookieMessage = document.createElement('div');
+// cookieMessage.classList.add('cookie-message');
+// cookieMessage.innerHTML =
+//   'We use cookies for improved functionality and analytics <button class="btn btn--close-cookie">Got it!</button>';
+// header.append(cookieMessage);
+// // header.prepend(cookieMessage.cloneNode(true));
+// document
+//   .querySelector('.btn--close-cookie')
+//   .addEventListener('click', function () {
+//     cookieMessage.remove();
+//   });
 
-console.log(logo.dataset.qa);
+// // styling element
+// cookieMessage.style.backgroundColor = '#37383d';
+// cookieMessage.style.width = '120%';
+// console.log(getComputedStyle(cookieMessage).height);
+// cookieMessage.style.height =
+//   Number.parseFloat(getComputedStyle(cookieMessage).height, 10) + 30 + 'px';
 
-const mouseEnterAlert = function () {
-  alert('addEventListener: great! you are reading the heading :D');
-};
-const h1 = document.querySelector('h1');
-// h1.addEventListener('mouseenter', mouseEnterAlert);
-// h1.removeEventListener('mouseenter', mouseEnterAlert);
+// // document.documentElement.style.setProperty('--color-primary', 'orangered');
 
-//older way to listen to events
-// h1.onmouseenter = function () {
-//   alert('onmouseenter: great! you are reading the heading :D');
+// const logo = document.querySelector('.nav__logo');
+// console.log(logo.alt);
+// console.log(logo.src);
+// console.log(logo.className);
+// console.log(logo.id);
+
+// console.log(logo.dataset.qa);
+
+// const mouseEnterAlert = function () {
+//   alert('addEventListener: great! you are reading the heading :D');
 // };
+// const h1 = document.querySelector('h1');
+// // h1.addEventListener('mouseenter', mouseEnterAlert);
+// // h1.removeEventListener('mouseenter', mouseEnterAlert);
 
-// setTimeout(() => h1.removeEventListener('mouseenter', mouseEnterAlert), 5000);
+// //older way to listen to events
+// // h1.onmouseenter = function () {
+// //   alert('onmouseenter: great! you are reading the heading :D');
+// // };
 
-// bubling
-const randomColor = () =>
-  `rgb(${Math.trunc(Math.random() * 255 + 1)}, ${Math.trunc(
-    Math.random() * 255 + 1
-  )}, ${Math.trunc(Math.random() * 255 + 1)})`;
+// // setTimeout(() => h1.removeEventListener('mouseenter', mouseEnterAlert), 5000);
 
-const navLink = document.querySelector('.nav__link');
-const navLinks = document.querySelector('.nav__links');
-const navSection = document.querySelector('.nav');
+// // bubling
+// const randomColor = () =>
+//   `rgb(${Math.trunc(Math.random() * 255 + 1)}, ${Math.trunc(
+//     Math.random() * 255 + 1
+//   )}, ${Math.trunc(Math.random() * 255 + 1)})`;
 
-navLink.addEventListener('click', function (e) {
-  this.style.backgroundColor = randomColor();
-  e.stopPropagation();
-});
-navLinks.addEventListener('click', function (e) {
-  this.style.backgroundColor = randomColor();
-});
-navSection.addEventListener('click', function (e) {
-  this.style.backgroundColor = randomColor();
-});
+// const navLink = document.querySelector('.nav__link');
+// const navLinks = document.querySelector('.nav__links');
+// const navSection = document.querySelector('.nav');
+
+// navLink.addEventListener('click', function (e) {
+//   this.style.backgroundColor = randomColor();
+//   e.stopPropagation();
+// });
+// navLinks.addEventListener('click', function (e) {
+//   this.style.backgroundColor = randomColor();
+// });
+// navSection.addEventListener('click', function (e) {
+//   this.style.backgroundColor = randomColor();
+// });
