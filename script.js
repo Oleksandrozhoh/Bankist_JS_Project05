@@ -54,6 +54,31 @@ navMenu.addEventListener('click', function (e) {
 
 ///////////////////////////LECTURES/////////////////////////////
 
+// DOM triversing
+const h1 = document.querySelector('h1');
+const highlights = h1.querySelectorAll('.highlight');
+console.log(highlights);
+console.log(h1.childNodes);
+console.log(h1.children);
+console.log(h1.firstElementChild);
+console.log(h1.lastElementChild);
+console.log(h1.parentNode);
+console.log(h1.parentElement);
+
+h1.closest('.header').style.background = 'var(--gradient-secondary)';
+
+console.log(h1.previousElementSibling);
+console.log(h1.nextElementSibling);
+
+// get all the siblings of H1 element and add red background to all of them but h1 itself
+const allChildElements = h1.parentElement.children;
+console.log(allChildElements);
+[...allChildElements].forEach(function (el) {
+  if (el !== h1) {
+    el.style.background = 'red';
+  }
+});
+
 // btnLearnMore.addEventListener('click', function (e) {
 //   const s1coordinates = section1.getBoundingClientRect();
 //   //scrolling
