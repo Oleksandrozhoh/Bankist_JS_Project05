@@ -52,32 +52,62 @@ navMenu.addEventListener('click', function (e) {
   }
 });
 
+// Tabs component
+const tabs = document.querySelectorAll('.operations__tab');
+const tabsContainer = document.querySelector('.operations__tab-container');
+const tabsContent = document.querySelectorAll('.operations__content');
+
+tabsContainer.addEventListener('click', function (e) {
+  // using closesed parent method to always select the button
+  const clickedEl = e.target.closest('.operations__tab');
+  console.log(clickedEl);
+
+  // check if the click wasoutside of the buttons
+  if (!clickedEl) return;
+
+  // make clicked button active and rest of the buttons not
+  tabs.forEach(tab => {
+    if (tab === clickedEl) tab.classList.add('operations__tab--active');
+    else tab.classList.remove('operations__tab--active');
+  });
+
+  // make clicked content active and rest of the contents not
+  const clickedElDataValue = clickedEl.dataset.tab;
+  tabsContent.forEach(function (content) {
+    if (
+      content.classList.contains(`operations__content--${clickedElDataValue}`)
+    )
+      content.classList.add('operations__content--active');
+    else content.classList.remove('operations__content--active');
+  });
+});
+
 ///////////////////////////LECTURES/////////////////////////////
 
 // DOM triversing
-const h1 = document.querySelector('h1');
-const highlights = h1.querySelectorAll('.highlight');
-console.log(highlights);
-console.log(h1.childNodes);
-console.log(h1.children);
-console.log(h1.firstElementChild);
-console.log(h1.lastElementChild);
-console.log(h1.parentNode);
-console.log(h1.parentElement);
+// const h1 = document.querySelector('h1');
+// const highlights = h1.querySelectorAll('.highlight');
+// console.log(highlights);
+// console.log(h1.childNodes);
+// console.log(h1.children);
+// console.log(h1.firstElementChild);
+// console.log(h1.lastElementChild);
+// console.log(h1.parentNode);
+// console.log(h1.parentElement);
 
-h1.closest('.header').style.background = 'var(--gradient-secondary)';
+// h1.closest('.header').style.background = 'var(--gradient-secondary)';
 
-console.log(h1.previousElementSibling);
-console.log(h1.nextElementSibling);
+// console.log(h1.previousElementSibling);
+// console.log(h1.nextElementSibling);
 
-// get all the siblings of H1 element and add red background to all of them but h1 itself
-const allChildElements = h1.parentElement.children;
-console.log(allChildElements);
-[...allChildElements].forEach(function (el) {
-  if (el !== h1) {
-    el.style.background = 'red';
-  }
-});
+// // get all the siblings of H1 element and add red background to all of them but h1 itself
+// const allChildElements = h1.parentElement.children;
+// console.log(allChildElements);
+// [...allChildElements].forEach(function (el) {
+//   if (el !== h1) {
+//     el.style.background = 'red';
+//   }
+// });
 
 // btnLearnMore.addEventListener('click', function (e) {
 //   const s1coordinates = section1.getBoundingClientRect();
