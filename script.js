@@ -13,6 +13,11 @@ const section1 = document.getElementById('section--1');
 const section2 = document.getElementById('section--2');
 const section3 = document.getElementById('section--3');
 const navMenu = document.querySelector('.nav__links');
+const tabs = document.querySelectorAll('.operations__tab');
+const tabsContainer = document.querySelector('.operations__tab-container');
+const tabsContent = document.querySelectorAll('.operations__content');
+const navMenuSection = document.querySelector('.nav');
+const navLinks = document.querySelectorAll('.nav__link');
 
 // functions
 const openModal = function (e) {
@@ -53,10 +58,6 @@ navMenu.addEventListener('click', function (e) {
 });
 
 // Tabs component
-const tabs = document.querySelectorAll('.operations__tab');
-const tabsContainer = document.querySelector('.operations__tab-container');
-const tabsContent = document.querySelectorAll('.operations__content');
-
 tabsContainer.addEventListener('click', function (e) {
   // using closesed parent method to always select the button
   const clickedEl = e.target.closest('.operations__tab');
@@ -81,6 +82,28 @@ tabsContainer.addEventListener('click', function (e) {
     else content.classList.remove('operations__content--active');
   });
 });
+
+// Menu fade animation
+const handleHover = function (e) {
+  const hoveredOver = e.target;
+  console.log(this, e.currentTarget);
+  const siblingLinks = hoveredOver
+    .closest('.nav')
+    .querySelectorAll('.nav__link');
+  const logo = hoveredOver.closest('.nav').querySelector('.nav__logo');
+  if (hoveredOver.classList.contains('nav__link')) {
+    siblingLinks.forEach(el => {
+      if (el !== hoveredOver) {
+        el.style.opacity = this;
+      }
+    });
+    logo.style.opacity = this;
+  }
+};
+
+navMenuSection.addEventListener('mouseover', handleHover.bind(0.5));
+
+navMenuSection.addEventListener('mouseout', handleHover.bind(1));
 
 ///////////////////////////LECTURES/////////////////////////////
 
