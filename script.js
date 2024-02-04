@@ -153,6 +153,29 @@ allSections.forEach(section => {
   section.classList.add('section--hidden');
 });
 
+//////////////////////////////////////////////////////////
+// revealing features images
+const featuresImgs = document.querySelectorAll("img[data-src='img/grow.jpg']");
+
+const loadFeatureImgs = function (entries) {
+  entries.forEach(entry => console.log(entry));
+  const entry = entries[0];
+  if (entry.isIntersecting) {
+    entry.target.setAttribute('src', entry.target.dataset.src);
+    entry.target.classList.remove('lazy-img');
+    imgObserver.unobserve(entry.target);
+  }
+};
+
+const imgObserver = new IntersectionObserver(loadFeatureImgs, {
+  root: null,
+  threshold: 0.3,
+});
+
+featuresImgs.forEach(img => {
+  imgObserver.observe(img);
+});
+
 ///////////////////////////LECTURES/////////////////////////////
 
 // DOM triversing
