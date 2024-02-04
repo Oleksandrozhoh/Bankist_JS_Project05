@@ -41,11 +41,13 @@ document.addEventListener('keydown', function (e) {
   }
 });
 
+////////////////////////////////////////////////
 // learn more scrolling
 btnLearnMore.addEventListener('click', function (e) {
   section1.scrollIntoView({ behavior: 'smooth' });
 });
 
+//////////////////////////////////////////////////////
 // navigation menu scrolling ( with event delegation through navMenu section )
 navMenu.addEventListener('click', function (e) {
   e.preventDefault();
@@ -57,11 +59,11 @@ navMenu.addEventListener('click', function (e) {
   }
 });
 
+///////////////////////////////////////////////
 // Tabs component
 tabsContainer.addEventListener('click', function (e) {
   // using closesed parent method to always select the button
   const clickedEl = e.target.closest('.operations__tab');
-  console.log(clickedEl);
 
   // check if the click wasoutside of the buttons
   if (!clickedEl) return;
@@ -83,10 +85,10 @@ tabsContainer.addEventListener('click', function (e) {
   });
 });
 
+/////////////////////////////////////////////////////
 // Menu fade animation
 const handleHover = function (e) {
   const hoveredOver = e.target;
-  console.log(this, e.currentTarget);
   const siblingLinks = hoveredOver
     .closest('.nav')
     .querySelectorAll('.nav__link');
@@ -102,8 +104,32 @@ const handleHover = function (e) {
 };
 
 navMenuSection.addEventListener('mouseover', handleHover.bind(0.5));
-
 navMenuSection.addEventListener('mouseout', handleHover.bind(1));
+
+//////////////////////////////////////////////////////////
+// sticky navigation menu bar
+// window.addEventListener('scroll', function () {
+//   const section1Pos = section1.getBoundingClientRect();
+//   if (section1Pos.top < 0) {
+//     navMenuSection.classList.add('sticky');
+//   } else {
+//     navMenuSection.classList.remove('sticky');
+//   }
+// });
+
+// with intersection observer API
+const obsCallback = function (entries) {
+  if (!entries[0].isIntersecting) navMenuSection.classList.add('sticky');
+  else navMenuSection.classList.remove('sticky');
+  console.log(navMenuSection.getBoundingClientRect().height);
+};
+const obsOptions = {
+  root: null,
+  threshold: 0,
+  rootMargin: `-${navMenuSection.getBoundingClientRect().height}px`,
+};
+const observer = new IntersectionObserver(obsCallback, obsOptions);
+observer.observe(header);
 
 ///////////////////////////LECTURES/////////////////////////////
 
