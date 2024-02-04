@@ -150,7 +150,7 @@ const sectionObserver = new IntersectionObserver(revealSection, {
 
 allSections.forEach(section => {
   sectionObserver.observe(section);
-  section.classList.add('section--hidden');
+  // section.classList.add('section--hidden');
 });
 
 //////////////////////////////////////////////////////////
@@ -180,6 +180,52 @@ featuresImgs.forEach(img => {
   imgObserver.observe(img);
 });
 
+//////////////////////////////////////////////////////////
+// slider
+const slides = document.querySelectorAll('.slide');
+const sliderBtnLeft = document.querySelector('.slider__btn--left');
+const sliderBtnRight = document.querySelector('.slider__btn--right');
+
+const goToSlide = function (slide) {
+  slides.forEach((s, i) => {
+    s.style.transform = `translateX(${100 * (i - slide)}%)`;
+  });
+};
+
+const prevSlide = function () {
+  if (currentSlide === 0) {
+    currentSlide = maxSlide - 1;
+  } else {
+    currentSlide--;
+  }
+  goToSlide(currentSlide);
+};
+
+const nextSlide = function () {
+  if (currentSlide === maxSlide - 1) {
+    currentSlide = 0;
+  } else {
+    currentSlide++;
+  }
+  goToSlide(currentSlide);
+};
+
+let currentSlide = 0;
+const maxSlide = slides.length;
+goToSlide(currentSlide);
+
+sliderBtnLeft.addEventListener('click', prevSlide);
+sliderBtnRight.addEventListener('click', nextSlide);
+
+document.addEventListener('keydown', function (e) {
+  if (
+    sliderBtnLeft.getBoundingClientRect().y > 0 &&
+    sliderBtnLeft.getBoundingClientRect().y < 800
+  ) {
+    if (e.key === 'ArrowRight') nextSlide();
+    if (e.key === 'ArrowLeft') prevSlide();
+  }
+});
 ///////////////////////////LECTURES/////////////////////////////
 
 // DOM triversing
