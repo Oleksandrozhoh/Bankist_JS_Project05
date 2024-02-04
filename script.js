@@ -264,6 +264,13 @@ const slider = function () {
 };
 slider();
 
+//////////////////////////////////////////////////////////
+// page close confirmation
+window.addEventListener('beforeunload', function (e) {
+  e.preventDefault();
+  console.log(e);
+  e.returnValue = '';
+});
 ///////////////////////////LECTURES/////////////////////////////
 
 // DOM triversing
