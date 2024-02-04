@@ -121,7 +121,6 @@ navMenuSection.addEventListener('mouseout', handleHover.bind(1));
 const obsCallback = function (entries) {
   if (!entries[0].isIntersecting) navMenuSection.classList.add('sticky');
   else navMenuSection.classList.remove('sticky');
-  console.log(navMenuSection.getBoundingClientRect().height);
 };
 const obsOptions = {
   root: null,
@@ -130,6 +129,29 @@ const obsOptions = {
 };
 const observer = new IntersectionObserver(obsCallback, obsOptions);
 observer.observe(header);
+
+//////////////////////////////////////////////////////////
+// reveal sections
+const allSections = document.querySelectorAll('.section');
+
+const revealSection = function (entries, observer) {
+  entries.forEach(e => console.log(e));
+  const entry = entries[0];
+  if (entry.isIntersecting) {
+    entry.target.classList.remove('section--hidden');
+    observer.unobserve(entry.target);
+  }
+};
+
+const sectionObserver = new IntersectionObserver(revealSection, {
+  root: null,
+  threshold: 0.2,
+});
+
+allSections.forEach(section => {
+  sectionObserver.observe(section);
+  section.classList.add('section--hidden');
+});
 
 ///////////////////////////LECTURES/////////////////////////////
 
