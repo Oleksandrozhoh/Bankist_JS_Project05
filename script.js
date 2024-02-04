@@ -155,21 +155,25 @@ allSections.forEach(section => {
 
 //////////////////////////////////////////////////////////
 // revealing features images
-const featuresImgs = document.querySelectorAll("img[data-src='img/grow.jpg']");
+const featuresImgs = document.querySelectorAll('img[data-src]');
 
 const loadFeatureImgs = function (entries) {
   entries.forEach(entry => console.log(entry));
   const entry = entries[0];
   if (entry.isIntersecting) {
     entry.target.setAttribute('src', entry.target.dataset.src);
-    entry.target.classList.remove('lazy-img');
+    // remove the blur only when img is loaded (JS triggering 'load' event automaticaly behind the scenes)
+    entry.target.addEventListener('load', function () {
+      entry.target.classList.remove('lazy-img');
+    });
     imgObserver.unobserve(entry.target);
   }
 };
 
 const imgObserver = new IntersectionObserver(loadFeatureImgs, {
   root: null,
-  threshold: 0.3,
+  threshold: 0,
+  rootMargin: '-10px',
 });
 
 featuresImgs.forEach(img => {
